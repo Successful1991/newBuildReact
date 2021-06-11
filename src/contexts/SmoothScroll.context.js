@@ -2,17 +2,18 @@ import React, { createContext, useEffect, useState } from 'react';
 
 export const SmoothScrollContext = createContext({
 	scroll: null,
-})
+});
 
 export const SmoothScrollProvider = ({ children, options }) => {
-	const [scroll, setScroll] = useState(null)
+	const [scroll, setScroll] = useState(null);
 	
 	useEffect(() => {
 		if (!scroll) {
-			;(async () => {
+			(async () => {
 				try {
-					const LocomotiveScroll = (await import('locomotive-scroll')).default
-					
+					const LocomotiveScroll = (await import('locomotive-scroll')).default;
+					console.log(15, LocomotiveScroll);
+					console.log(16, document.querySelector('[data-scroll-container]'));
 					setScroll(
 						new LocomotiveScroll({
 							el: document.querySelector('[data-scroll-container]') ?? undefined,
@@ -31,7 +32,7 @@ export const SmoothScrollProvider = ({ children, options }) => {
 	}, [scroll]) // eslint-disable-line react-hooks/exhaustive-deps
 	
 	return <SmoothScrollContext.Provider value={{ scroll }}>{children}</SmoothScrollContext.Provider>
-}
+};
 
 SmoothScrollContext.displayName = 'SmoothScrollContext'
 SmoothScrollProvider.displayName = 'SmoothScrollProvider'
