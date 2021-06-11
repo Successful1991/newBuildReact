@@ -1,6 +1,7 @@
-import { useRef, useEffect } from "react";
+import { useContext } from 'react';
 import Head from 'next/head';
-import LocomotiveScroll from 'locomotive-scroll';
+// import LocomotiveScroll from 'locomotive-scroll';
+import { SmoothScrollContext } from '../contexts/SmoothScroll.context';
 import styles from '../styles/Home.module.scss';
 import { ReactComponent as IntroIcon } from '../../public/smarto.svg';
 import { Button } from '../components/UI/Button';
@@ -9,16 +10,27 @@ import { Footer } from '../components/Footer/Footer';
 import 'locomotive-scroll/dist/locomotive-scroll.css';
 
 export default function Home() {
-  const containerRef = useRef(null);
+  const { scroll } = useContext(SmoothScrollContext);
   
-  useEffect(() => {
-    const scroll = new LocomotiveScroll({
-      el: containerRef.current,
-      smooth: true,
-      smoothMobile: false,
-      inertia: 1.1
-    });
-  });
+  const goToSecondPart = event => {
+    event.preventDefault()
+    scroll && scroll.scrollTo('#second-part')
+  };
+  
+  const goToTop = event => {
+    event.preventDefault()
+    scroll && scroll.scrollTo(0)
+  };
+  console.log(scroll);
+  // const containerRef = useRef(null);
+   // useEffect(() => {
+  //   const scroll = new LocomotiveScroll({
+  //     el: containerRef.current,
+  //     smooth: true,
+  //     smoothMobile: false,
+  //     inertia: 1.1
+  //   });
+  // });
   
   return (
     <div className={styles.container}>
@@ -28,11 +40,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main className={styles.main} data-scroll-container ref={containerRef}>
+      <section data-scroll-section className={styles.main} >
           <IntroIcon width={400} height={200} />
-          <h1 className={styles.title}>Starting template</h1>
-          <Button>Click me</Button>
-          <p >
+          <h1 data-scroll className={styles.title}>Starting template</h1>
+          <a href="#second-part" onClick={goToSecondPart}>
+            Go to second part
+          </a>
+          <Button data-scroll>Click me</Button>
+          <p data-scroll>
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
             Soluta nostrum vitae eaque dolores nam enim
             vel! Incidunt ea et veritatis eveniet maiores laborum reprehenderit fugiat voluptatum omnis quo.
@@ -61,7 +76,7 @@ export default function Home() {
             autem commodi consequuntur cum debitis doloremque dolores dolorum, ea inventore maxime
             odit, porro quam sed sint, ullam. Harum, soluta.
           </p>
-          <p>
+          <p data-scroll>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam amet asperiores autem
             commodi consequuntur cum debitis doloremque dolores dolorum, ea inventore maxime odit,
             porro quam sed sint, ullam. Harum, soluta.
@@ -71,12 +86,12 @@ export default function Home() {
             autem commodi consequuntur cum debitis doloremque dolores dolorum, ea inventore
             maxime odit, porro quam sed sint, ullam. Harum, soluta.
           </p>
-          <p>
+          <p data-scroll>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam amet asperiores
             autem commodi consequuntur cum debitis doloremque dolores dolorum, ea inventore
             maxime odit, porro quam sed sint, ullam. Harum, soluta.
           </p>
-      </main>
+      </section>
       <Footer />
     </div>
   );
