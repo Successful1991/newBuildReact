@@ -1,0 +1,26 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 15px;
+  margin: 10px;
+  background: #ff9e23;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.icon {
+  margin: 5px;
+  fill: currentColor;
+}
+
+.small {
+  font-size: 12px;
+}
+
+.base {
+  font-size: 16px;
+  @include md {
+    font-size: 10px;
+  }
+}

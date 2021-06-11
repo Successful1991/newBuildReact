@@ -1,0 +1,7 @@
+$md: 1020px;
+
+@mixin md {
+  @media (min-width: #{$md}) {
+    @content;
+  }
+}
