@@ -2,10 +2,10 @@
 import { SmoothScrollProvider } from '../src/contexts/SmoothScroll.context';
 import Home from '../src/pages/index';
 
-export default function IndexPage(props) {
+export default function IndexPage() {
 	return (
 		<SmoothScrollProvider options={{ smooth: true }}>
-			<Home {...props} />
+			<Home />
 		</SmoothScrollProvider>
 	)
 }
