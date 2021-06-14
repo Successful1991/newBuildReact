@@ -25,4 +25,5 @@ export const Header = () => {
 			<Menu/>
 		</header>
 	);
+
 };
