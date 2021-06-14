@@ -17,12 +17,6 @@ export const Header = () => {
 			isOnTopSet(event.scroll.y < 50)
 		});
 	});
-	// useCallback(() => {
-	// 	scroll.on('scroll', (event) => {
-	// 		console.log(event);
-	// 		// isOnTopSet(event.scroll.y < 50)
-	// 	});
-	// }, scroll);
 	
 	const headerClassList = cn(css.header, { [css.header__big] : isOnTop});
 	return (
