@@ -37,10 +37,10 @@ function getTemplate(type, name) {
   }
 }
 const tmplateName = process.argv[2];
-console.log(process.argv);
+
 if (!!tmplateName === false) {
     console.warn('You didn`t enter component name');
-    return;
+    process.exit();
 }
 
 const pathesToComponentParts = {

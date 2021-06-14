@@ -30,7 +30,7 @@ const tmplateName = process.argv[2];
 
 if (!!tmplateName === false) {
 	console.warn('You didn`t enter component name');
-	return;
+	process.exit();
 }
 
 const pathesToComponentParts = {
