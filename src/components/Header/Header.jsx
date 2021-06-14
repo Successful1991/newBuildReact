@@ -1,22 +1,33 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import cn from 'classnames';
 import css from './Header.module.scss';
+// eslint-disable-next-line import/named
+import { SmoothScrollContext } from '../../contexts/SmoothScroll.context';
+import { Menu } from '../Menu/Menu';
 
 export const Header = () => {
-	// console.log(props);
-	// const { scroll } = props;
-	// const [isOnTop, isOnTopSet] = useState(true);
-	// useEffect(() => {
-		
-		// scroll.on('scroll', (event) => {
-		// 	isOnTopSet(event.scroll.y < 50)
-		// });
-	// });
+	const { scroll } = useContext(SmoothScrollContext);
+	const [isOnTop, isOnTopSet] = useState(true);
 	
-	// const headerClassList = cn(css.header, { [css.header__big] : isOnTop});
+	useEffect(() => {
+		if (!scroll) return;
+
+		scroll.on('scroll', (event) => {
+			isOnTopSet(event.scroll.y < 50)
+		});
+	});
+	// useCallback(() => {
+	// 	scroll.on('scroll', (event) => {
+	// 		console.log(event);
+	// 		// isOnTopSet(event.scroll.y < 50)
+	// 	});
+	// }, scroll);
+	
+	const headerClassList = cn(css.header, { [css.header__big] : isOnTop});
 	return (
-		<header >
+		<header className={headerClassList}>
 			шапка
+			<Menu/>
 		</header>
 	);
 };

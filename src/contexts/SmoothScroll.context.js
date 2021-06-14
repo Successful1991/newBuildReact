@@ -12,14 +12,12 @@ export const SmoothScrollProvider = ({ children, options }) => {
 			(async () => {
 				try {
 					const LocomotiveScroll = (await import('locomotive-scroll')).default;
-					console.log(15, LocomotiveScroll);
-					console.log(16, document.querySelector('[data-scroll-container]'));
 					setScroll(
 						new LocomotiveScroll({
 							el: document.querySelector('[data-scroll-container]') ?? undefined,
 							...options,
 						})
-					)
+					);
 				} catch (error) {
 					throw Error(`[SmoothScrollProvider]: ${error}`)
 				}
@@ -29,10 +27,10 @@ export const SmoothScrollProvider = ({ children, options }) => {
 		return () => {
 			scroll && scroll.destroy()
 		}
-	}, [scroll]) // eslint-disable-line react-hooks/exhaustive-deps
+	}, [scroll]);// eslint-disable-line react-hooks/exhaustive-deps
 	
 	return <SmoothScrollContext.Provider value={{ scroll }}>{children}</SmoothScrollContext.Provider>
 };
 
-SmoothScrollContext.displayName = 'SmoothScrollContext'
-SmoothScrollProvider.displayName = 'SmoothScrollProvider'
+SmoothScrollContext.displayName = 'SmoothScrollContext';
+SmoothScrollProvider.displayName = 'SmoothScrollProvider';

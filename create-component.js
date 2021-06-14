@@ -20,7 +20,7 @@ export const ${scriptName} = ({ children, size }) => {
   );
 };
 
-Button.propTypes = {
+${scriptName}.propTypes = {
   children: PropTypes.node,
 };
 `
