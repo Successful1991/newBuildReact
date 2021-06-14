@@ -20,6 +20,8 @@ export const Header = () => {
 		});
 	});
 	
+	
+	
 	const headerClassList = cn(css.header, { [css.header__big] : isOnTop});
 	return (
 		<header className={headerClassList}>
