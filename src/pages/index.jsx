@@ -1,15 +1,54 @@
-import { useRef } from 'react';
+import React, {useContext, useRef} from 'react';
+import PropTypes from 'prop-types';
 import Head from 'next/head';
 import 'locomotive-scroll/dist/locomotive-scroll.css';
-// import { SmoothScrollContext } from '../contexts/SmoothScroll.context';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import NativeSelect from '@material-ui/core/NativeSelect';
+import {useUpdateEffect} from "react-use";
 import styles from '../styles/Home.module.scss';
 import { ReactComponent as IntroIcon } from '../../public/smarto.svg';
 import { Button } from '../components/UI/Button';
-import { Header } from '../components/Header/Header';
-import { Footer } from '../components/Footer/Footer';
+import { Header } from '../components/UI/Header/Header';
+import { Footer } from '../components/UI/Footer/Footer';
+// eslint-disable-next-line import/named
+import {SmoothScrollContext} from '../contexts/SmoothScroll.context';
 
 export default function Home() {
+  const { scroll } = useContext(SmoothScrollContext);
   const scrollRef = useRef(null);
+  const [selectId, setSelectId] = React.useState(1);
+  
+  useUpdateEffect(() => {
+    scroll.update();
+  });
+
+  const handleChange = (event) => {
+    setSelectId(+event.target.value);
+  };
+  
+  function TabPanel(props) {
+    const { children, value, index, ...other } = props;
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}
+      >
+        {value === index && (
+            children
+        )}
+      </div>
+    );
+  }
+
+  TabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.any.isRequired,
+    value: PropTypes.any.isRequired,
+  };
 
   return (
     <div data-scroll-container className={styles.container} ref={scrollRef} id='app'>
@@ -26,7 +65,25 @@ export default function Home() {
             Go to second part
           </a>
           <Button data-scroll>Click me</Button>
-          <p data-scroll>
+          <FormControl>
+            <InputLabel>LIVE камери</InputLabel>
+            <NativeSelect
+              value={selectId}
+              onChange={handleChange}
+              name="camers"
+              >
+              <optgroup label="outside">
+                <option value={1}>camera 1</option>
+              </optgroup>
+              <optgroup label="inside">
+                <option value={2}>camera 2.1</option>
+                <option value={3}>camera 2.2</option>
+              </optgroup>
+            </NativeSelect>
+          </FormControl>
+
+          <TabPanel value={selectId} index={1} >
+          <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
             Soluta nostrum vitae eaque dolores nam enim
             vel! Incidunt ea et veritatis eveniet maiores laborum reprehenderit fugiat voluptatum omnis quo.
@@ -50,11 +107,13 @@ export default function Home() {
             magnam iure doloremque, sit consequatur vitae.
             Illo, odio distinctio.
           </p>
-          <p data-scroll>
+          <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam amet asperiores
             autem commodi consequuntur cum debitis doloremque dolores dolorum, ea inventore maxime
             odit, porro quam sed sint, ullam. Harum, soluta.
           </p>
+          </TabPanel>
+          <TabPanel value={selectId} index={2} >
           <p data-scroll>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam amet asperiores autem
             commodi consequuntur cum debitis doloremque dolores dolorum, ea inventore maxime odit,
@@ -70,31 +129,8 @@ export default function Home() {
             autem commodi consequuntur cum debitis doloremque dolores dolorum, ea inventore
             maxime odit, porro quam sed sint, ullam. Harum, soluta.
           </p>
-          <p data-scroll>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam amet asperiores autem
-            commodi consequuntur cum debitis doloremque dolores dolorum, ea inventore maxime odit,
-            porro quam sed sint, ullam. Harum, soluta.
-          </p>
-          <p data-scroll>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam amet asperiores
-            autem commodi consequuntur cum debitis doloremque dolores dolorum, ea inventore
-            maxime odit, porro quam sed sint, ullam. Harum, soluta.
-          </p>
-          <p data-scroll>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam amet asperiores
-            autem commodi consequuntur cum debitis doloremque dolores dolorum, ea inventore
-            maxime odit, porro quam sed sint, ullam. Harum, soluta.
-          </p>
-          <p data-scroll>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam amet asperiores
-            autem commodi consequuntur cum debitis doloremque dolores dolorum, ea inventore
-            maxime odit, porro quam sed sint, ullam. Harum, soluta.
-          </p>
-          <p data-scroll>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam amet asperiores
-            autem commodi consequuntur cum debitis doloremque dolores dolorum, ea inventore
-            maxime odit, porro quam sed sint, ullam. Harum, soluta.
-          </p>
+          </TabPanel>
+          <TabPanel value={selectId} index={3} >
           <p data-scroll>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam amet asperiores autem
             commodi consequuntur cum debitis doloremque dolores dolorum, ea inventore maxime odit,
@@ -135,6 +171,32 @@ export default function Home() {
             autem commodi consequuntur cum debitis doloremque dolores dolorum, ea inventore
             maxime odit, porro quam sed sint, ullam. Harum, soluta.
           </p>
+          <p data-scroll>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam amet asperiores
+            autem commodi consequuntur cum debitis doloremque dolores dolorum, ea inventore
+            maxime odit, porro quam sed sint, ullam. Harum, soluta.
+          </p>
+          <p data-scroll>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam amet asperiores
+            autem commodi consequuntur cum debitis doloremque dolores dolorum, ea inventore
+            maxime odit, porro quam sed sint, ullam. Harum, soluta.
+          </p>
+          <p data-scroll>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam amet asperiores autem
+            commodi consequuntur cum debitis doloremque dolores dolorum, ea inventore maxime odit,
+            porro quam sed sint, ullam. Harum, soluta.
+          </p>
+          <p data-scroll>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam amet asperiores
+            autem commodi consequuntur cum debitis doloremque dolores dolorum, ea inventore
+            maxime odit, porro quam sed sint, ullam. Harum, soluta.
+          </p>
+          <p data-scroll>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam amet asperiores
+            autem commodi consequuntur cum debitis doloremque dolores dolorum, ea inventore
+            maxime odit, porro quam sed sint, ullam. Harum, soluta.
+          </p>
+          </TabPanel>
       </section>
       <Footer />
     </div>

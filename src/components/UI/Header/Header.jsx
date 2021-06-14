@@ -2,7 +2,8 @@ import React, {useContext, useEffect, useState} from 'react';
 import cn from 'classnames';
 import css from './Header.module.scss';
 // eslint-disable-next-line import/named
-import { SmoothScrollContext } from '../../contexts/SmoothScroll.context';
+import { SmoothScrollContext } from '../../../contexts/SmoothScroll.context';
+// eslint-disable-next-line import/named
 import { Menu } from '../Menu/Menu';
 
 export const Header = () => {
