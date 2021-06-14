@@ -6,6 +6,9 @@ import { SmoothScrollContext } from '../../../contexts/SmoothScroll.context';
 // eslint-disable-next-line import/named
 import { Menu } from '../Menu/Menu';
 
+
+
+
 export const Header = () => {
 	const { scroll } = useContext(SmoothScrollContext);
 	const [isOnTop, isOnTopSet] = useState(true);
