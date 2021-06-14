@@ -12,7 +12,9 @@ export const Header = () => {
 	
 	useEffect(() => {
 		if (!scroll) return;
-
+		
+		
+		
 		scroll.on('scroll', (event) => {
 			isOnTopSet(event.scroll.y < 50)
 		});
