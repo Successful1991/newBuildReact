@@ -16,7 +16,7 @@ lint:
 	npx eslint .
 
 template:
-	node create-component $(name)
+	node create-component $(name) $(type)
 
 templatePage:
 	node create-page $(name)

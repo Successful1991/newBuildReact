@@ -36,6 +36,7 @@ function getTemplate(type, name) {
   }
 }
 const tmplateName = process.argv[2];
+const typeComponent = process.argv[3] ? `${process.argv[3]}/` : '';
 
 if (!!tmplateName === false) {
     console.warn('You didn`t enter component name');
@@ -43,9 +44,9 @@ if (!!tmplateName === false) {
 }
 
 const pathesToComponentParts = {
-  style: `src/components/${tmplateName}`,
-  script: `src/components/${tmplateName}`,
-  jsx: `src/components/${tmplateName}`,
+  style: `src/components/${typeComponent}${tmplateName}`,
+  script: `src/components/${typeComponent}${tmplateName}`,
+  jsx: `src/components/${typeComponent}${tmplateName}`,
 };
 const formats = {
   style: 'module.scss',

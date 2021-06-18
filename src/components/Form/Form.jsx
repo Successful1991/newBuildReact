@@ -6,6 +6,7 @@ import * as yup from 'yup';
 import {Button, TextField} from '@material-ui/core';
 import i18next from "i18next";
 import { formService } from '../../services/form.service';
+import { MyDialogs } from '../UI/Dialog/Dialog';
 
 import cn from 'classnames';
 import css from './Form.module.scss';
