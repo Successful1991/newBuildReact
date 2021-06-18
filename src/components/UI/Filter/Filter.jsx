@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import { Formik, Field } from 'formik';
 import { has, toNumber } from 'lodash';
@@ -14,14 +14,15 @@ const CreateFilter = ({ filter, param, handlerForm }) => {
   const MyInput = ({ field, form, ...props }) => {
     return <Checkbox {...field} {...props} />;
   };
+  const [provisionalState, setProvisionalState] = useState(filter);
+  
   return <Formik
-    initialValues={{...filter, rooms: []}}
+    initialValues={{...provisionalState, rooms: []}}
     onSubmit={(values) => {
       alert(JSON.stringify(values, null, 2));
     }}
     validate={(values) => {
       handlerForm(values);
-      return {};
     }}
   >
     {({ handleChange, setFieldValue }) => <form className={css.form}>
@@ -29,22 +30,24 @@ const CreateFilter = ({ filter, param, handlerForm }) => {
         valueLabelDisplay='on'
         name='area'
         id='area'
-        value={filter.area}
+        value={provisionalState.area}
         step={1}
         min={param.area.min}
         max={param.area.max}
         marks={[{ value: param.area.min, label: param.area.min }, { value: param.area.max, label: param.area.max }]}
-        onChange={(event, val) => setFieldValue('area', val)}
+        onChange={(event, val) => setProvisionalState({...provisionalState, 'area': val})}
+        onChangeCommitted={(event, val) => setFieldValue('area', val)}
       />
       <Slider
         name='floor'
         id='floor'
-        value={filter.floor}
+        value={provisionalState.floor}
         step={1}
         min={param.floor.min}
         max={param.floor.max}
         marks={[{ value: param.floor.min, label: param.floor.min }, { value: param.floor.max, label: param.floor.max }]}
-        onChange={(event, val) => setFieldValue('floor', val)}
+        onChange={(event, val) => setProvisionalState({...provisionalState, 'floor': val})}
+        onChangeCommitted={(event, val) => setFieldValue('floor', val)}
       />
       <div role="group" aria-labelledby="checkbox-group">
         <Field type="checkbox" name='rooms' value='1' onChange={handleChange} component={MyInput}/>
@@ -88,7 +91,7 @@ export class Filter extends React.Component {
     this.state = {
       area: [this.params.area.min, this.params.area.max],
       floor: [this.params.floor.min, this.params.floor.max],
-      rooms: [...this.params.rooms],
+      rooms: [],
     };
     this.flats = props.flats;
     this.setFilteredFlats = props.setFilteredFlats;

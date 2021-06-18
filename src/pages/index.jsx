@@ -922,6 +922,8 @@ export default function Home({ containerRef }) {
     }
   ];
   const rendersCount = useRendersCount();
+  
+  
   return (
     <div className={styles.container} data-scroll-container ref={containerRef} id='app'>
       <Head>

@@ -1,12 +1,12 @@
-import { useRef } from 'react';
+import {useRef} from "react";
 import { LocomotiveScrollProvider } from 'react-locomotive-scroll';
-import Infrastructure from '../src/pages/Infrastructure';
+import Contact from '../src/pages/Contacts';
 
-export default function InfrastructurePage() {
+export default function IndexPage() {
 	const containerRef = useRef(null);
 	return (
 		<LocomotiveScrollProvider options={{ smooth: true }} containerRef={containerRef}>
-				<Infrastructure containerRef={containerRef} />
+			<Contact containerRef={containerRef} />
 		</LocomotiveScrollProvider>
 	)
 }
