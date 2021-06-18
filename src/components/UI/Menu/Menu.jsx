@@ -6,6 +6,7 @@ import BezierEasing from 'bezier-easing';
 import cn from 'classnames';
 import css from './Menu.module.scss';
 
+
 Modal.setAppElement('#app');
 
 const customStyles = {
@@ -74,5 +75,4 @@ export class Menu extends React.Component {
       </Modal>
     </>;
   }
-};
-
+}

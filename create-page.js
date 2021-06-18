@@ -2,13 +2,13 @@ const fs = require('fs');
 const path = require('path');
 
 function getPugTemplate(scriptName) {
-	return `
-import Head from 'next/head';
-import styles from '../styles/${scriptName.toUpperCase()}.module.scss';
-import { Header } from '../components/Header/Header';
-import { Footer } from '../components/Footer/Footer';
+	const capitalazeName = scriptName[0].toUpperCase()+scriptName.slice(1);
+	return `import Head from 'next/head';
+import styles from '../styles/${capitalazeName}.module.scss';
+import { Header } from '../components/UI/Header/Header';
+import { Footer } from '../components/UI/Footer/Footer';
 
-export default function Home() {
+export default function ${capitalazeName}() {
   return (
     <div className={styles.container}>
       <Head>
@@ -46,8 +46,9 @@ const typesFile = Object.keys(pathesToComponentParts);
 
 typesFile.forEach((type) => {
 	const pathToFolder = pathesToComponentParts[type];
+	// eslint-disable-next-line no-console
 	console.log(pathesToComponentParts);
-	fs.readdir(path.resolve(process.cwd(), pathToFolder), function(err, files) {
+	fs.readdir(path.resolve(process.cwd(), pathToFolder), (err, files) => {
 		let isFileExistInFolder = false;
 		const componentName = `${tmplateName}.${formats[type]}`;
 		
@@ -59,11 +60,13 @@ typesFile.forEach((type) => {
 		if (!isFileExistInFolder) {
 			const contentTemplate = (type === 'jsx') ? getPugTemplate(tmplateName) : '';
 			
-			fs.writeFile(pathToFile, contentTemplate, function(err) {
+			fs.writeFile(pathToFile, contentTemplate, () => {
+				// eslint-disable-next-line no-console
 				console.log(`\x1b[32m`, `${componentName} создан`);
 			});
 			return;
 		}
+		// eslint-disable-next-line no-console
 		console.log(`\x1b[33m%s\x1b[0m`, `${componentName} уже есть`);
 	});
 });

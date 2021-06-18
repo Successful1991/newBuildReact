@@ -6,8 +6,7 @@ function getIndexTemplate(name) {
 }
 
 function getPageTemplate(scriptName) {
-  return `
-import React from 'react';
+  return `import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import css from './${scriptName}.module.scss';
@@ -61,14 +60,16 @@ typesFile.forEach((type) => {
   const dirPath = path.resolve(process.cwd(), pathToFolder);
   try {
     fs.accessSync(dirPath);
+    // eslint-disable-next-line no-console
     console.log('directory exists');
   } catch (e) {
     fs.mkdirSync(dirPath);
+    // eslint-disable-next-line no-console
     console.log('directory created successfully');
   }
   
 
-  fs.readdir(dirPath, function(err, files) {
+  fs.readdir(dirPath, (err, files) => {
     let isFileExistInFolder = false;
     const componentName = type === 'script' ? `index.${formats[type]}` : `${tmplateName}.${formats[type]}`;
   
@@ -81,14 +82,14 @@ typesFile.forEach((type) => {
       
       const contentTemplate = getTemplate(type, tmplateName);
 
-      fs.writeFile(pathToFile, contentTemplate, function(err) {
-          console.log(`\x1b[32m`, `${componentName} создан`);
+      fs.writeFile(pathToFile, contentTemplate, () => {
+        // eslint-disable-next-line no-console
+        console.log(`\x1b[32m`, `${componentName} создан`);
       });
       return;
     }
+    // eslint-disable-next-line no-console
     console.log(`\x1b[33m%s\x1b[0m`, `${componentName} уже есть`);
-  }, () => {
-  
   });
 });
 
