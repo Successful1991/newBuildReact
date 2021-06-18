@@ -1,5 +1,5 @@
 develop:
-	npx webpack serve
+	npm run dev
 
 install:
 	npm install
