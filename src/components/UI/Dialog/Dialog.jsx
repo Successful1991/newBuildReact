@@ -52,38 +52,44 @@ const DialogActions = withStyles((theme) => ({
   },
 }))(MuiDialogActions);
 
-export default function MyDialogs({ title, text, button }) {
-  const [open, setOpen] = React.useState(false);
-  
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
-  
-  return (
-    <div>
-      {/*<Button variant="outlined" color="primary" onClick={handleClickOpen}>*/}
-      {/*  Open dialog*/}
-      {/*</Button>*/}
-      <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
-        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-          {title}
-        </DialogTitle>
-        <DialogContent dividers>
-          <Typography gutterBottom>
+const Title = (props) => <DialogTitle>{props.children}</DialogTitle>;
+const Buttons = (props) => <DialogActions>
+  <Button autoFocus onClick={props.handleClose} color="primary">
+    {props.children}
+  </Button>
+</DialogActions>;
+const Content = (props) =>  <DialogContent dividers>
+  <Typography gutterBottom>
+    {props.children}
+  </Typography>
+</DialogContent>;
+
+export default class SuccessModal extends React.Component {
+  static Title = Title;
+  static Content = Content;
+  static Buttons = Buttons;
+  constructor(props) {
+    super(props);
+    
+  }
+
+  render() {
+    const { title, text, button, handleClose } = this.props;
+    return (
+      <div>
+        <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title">
+          <Title id="customized-dialog-title">{title}</Title>
+          <DialogTitle id="customized-dialog-title">
+            {title}
+          </DialogTitle>
+          <Content >
             {text}
-          </Typography>
-        </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={handleClose} color="primary">
-            {button}
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
-  );
+          </Content>
+          <Buttons ></Buttons>
+        </Dialog>
+      </div>
+    );
+  }
 }
 
 Dialog.propTypes = {

@@ -6,7 +6,7 @@ import * as yup from 'yup';
 import {Button, TextField} from '@material-ui/core';
 import i18next from "i18next";
 import { formService } from '../../services/form.service';
-import { MyDialogs } from '../UI/Dialog/Dialog';
+import { SuccessModal } from '../UI/Dialog/Dialog';
 
 import cn from 'classnames';
 import css from './Form.module.scss';
@@ -47,6 +47,7 @@ export const CustomForm = () => {
           successSendingTitle: 'Повідомлення надіслано',
           successSendingText: 'Дякуємо за звернення! Очікуйте на дзвінок з відділу продажів BEREG ' +
             'Residence. Бажаємо приємного дня та гарного настрою =)',
+          successSendingButton: '',
           
           failedSendingTitle: 'Сталася помилка',
           failedSendingText: 'Повідомлення не було відправлено через невідому помилку сервера.',
@@ -73,6 +74,7 @@ export const CustomForm = () => {
           success: '',
           successSendingTitle: '',
           successSendingText: '',
+          successSendingButton: '',
     
           failedSendingTitle: '',
           failedSendingText: '',
@@ -96,6 +98,7 @@ export const CustomForm = () => {
           success: '',
           successSendingTitle: '',
           successSendingText: '',
+          successSendingButton: '',
     
           failedSendingTitle: '',
           failedSendingText: '',
@@ -121,6 +124,11 @@ export const CustomForm = () => {
     //   .email(i18n.t('errors.email'))
     //   .required(i18n.t('errors.required')),
   });
+  const [successModalIsOpen, setSuccessModalIsOpen] = React.useState(false);
+  
+  const closeSuccessModal = () => {
+    setSuccessModalIsOpen(false);
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -179,6 +187,15 @@ export const CustomForm = () => {
         <Button type="submit" disabled={formik.isSubmitting} variant="contained" color="primary" >
           {i18n.t('send')}</Button>
       </form>
+      {
+        successModalIsOpen && <SuccessModal handleClose={closeSuccessModal}>
+          <SuccessModal.Title>{i18n.t('successSendingTitle')}</SuccessModal.Title>
+          <SuccessModal.Content>{i18n.t('successSendingText')}</SuccessModal.Content>
+          <SuccessModal.Bottons handleClose={closeSuccessModal}>
+            {i18n.t('successSendingText')}
+          </SuccessModal.Bottons>
+        </SuccessModal>
+      }
     </div>
   );
 };
