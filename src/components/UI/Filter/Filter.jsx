@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import { Formik, Field } from 'formik';
-import { has, toNumber } from 'lodash';
+import has from 'lodash/has';
+import toNumber from 'lodash/toNumber';
 import {
   Slider,
   Checkbox,

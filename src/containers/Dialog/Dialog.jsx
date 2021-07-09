@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import css from './Dialog.module.scss';
 
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
@@ -12,29 +12,43 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 
-const styles = (theme) => ({
+// const styles = (theme) => ({
+//   root: {
+//     margin: 0,
+//     padding: theme.spacing(2),
+//   },
+//   closeButton: {
+//     position: 'absolute',
+//     right: theme.spacing(1),
+//     top: theme.spacing(1),
+//     color: theme.palette.grey[500],
+//   },
+// });
+const useStyles = makeStyles((theme) => ({
   root: {
-    margin: 0,
-    padding: theme.spacing(2),
+    margin: theme.spacing(6, 0, 3),
   },
   closeButton: {
     position: 'absolute',
-    right: theme.spacing(1),
-    top: theme.spacing(1),
-    color: theme.palette.grey[500],
+    right: '30px',
+    top: '50px',
+    color: 'green',
+    background: '#505dfe',
   },
-});
+}));
 
-const DialogTitle = withStyles(styles)((props) => {
-  const { children, classes, onClose, ...other } = props;
+const DialogTitle = ((props) => {
+  const classes = useStyles();
+  const { children, onClose, ...other } = props;
   return (
-    <MuiDialogTitle disableTypography className={classes.root} {...other}>
+    <MuiDialogTitle disableTypography  {...other}>
       <Typography variant="h6">{children}</Typography>
-      {onClose ? (
-        <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
-          close
-        </IconButton>
-      ) : null}
+      {/*{onClose ? (*/}
+      {/*  <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>*/}
+      {/*    close*/}
+      {/*    /!*<CloseIcon />*!/*/}
+      {/*  </IconButton>*/}
+      {/*) : null}*/}
     </MuiDialogTitle>
   );
 });
@@ -52,7 +66,9 @@ const DialogActions = withStyles((theme) => ({
   },
 }))(MuiDialogActions);
 
-const Title = (props) => <DialogTitle>{props.children}</DialogTitle>;
+const Title = (props) => <DialogTitle>{props.children}
+    <Button onClick={props.handleClose} />
+  </DialogTitle>;
 const Buttons = (props) => <DialogActions>
   <Button autoFocus onClick={props.handleClose} color="primary">
     {props.children}
@@ -64,28 +80,17 @@ const Content = (props) =>  <DialogContent dividers>
   </Typography>
 </DialogContent>;
 
-export default class SuccessModal extends React.Component {
+class SuccessModal extends React.Component {
   static Title = Title;
   static Content = Content;
   static Buttons = Buttons;
-  constructor(props) {
-    super(props);
-    
-  }
 
   render() {
-    const { title, text, button, handleClose } = this.props;
+    const { handleClose, isOpen } = this.props;
     return (
       <div>
-        <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title">
-          <Title id="customized-dialog-title">{title}</Title>
-          <DialogTitle id="customized-dialog-title">
-            {title}
-          </DialogTitle>
-          <Content >
-            {text}
-          </Content>
-          <Buttons ></Buttons>
+        <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={isOpen}>
+          {this.props.children}
         </Dialog>
       </div>
     );
@@ -95,3 +100,5 @@ export default class SuccessModal extends React.Component {
 Dialog.propTypes = {
   children: PropTypes.node,
 };
+
+export { SuccessModal }

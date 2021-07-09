@@ -6,7 +6,7 @@ import * as yup from 'yup';
 import {Button, TextField} from '@material-ui/core';
 import i18next from "i18next";
 import { formService } from '../../services/form.service';
-import { SuccessModal } from '../UI/Dialog/Dialog';
+import { SuccessModal } from '../Dialog/Dialog';
 
 import cn from 'classnames';
 import css from './Form.module.scss';
@@ -14,11 +14,12 @@ import css from './Form.module.scss';
 const lang = 'uk';
 
 const submitHandler = (form, values) => {
-  formService.sendForm(values).then((resp) => {
-  
-  }).throw((err) => {
-  
-  });
+  form.resetForm()
+  // formService.sendForm(values).then((resp) => {
+  //
+  // }).throw((err) => {
+  //
+  // });
 };
 
 export const CustomForm = () => {
@@ -138,12 +139,8 @@ export const CustomForm = () => {
     },
     validationSchema,
     onSubmit: (values) => {
-      // alert(JSON.stringify(values, null, 2));
-      setTimeout(() => {
-        formik.resetForm();
-        console.log(values);
-        return true;
-      }, 10000)
+      setSuccessModalIsOpen(true)
+      submitHandler(formik, values)
     },
   });
   
@@ -188,12 +185,16 @@ export const CustomForm = () => {
           {i18n.t('send')}</Button>
       </form>
       {
-        successModalIsOpen && <SuccessModal handleClose={closeSuccessModal}>
-          <SuccessModal.Title>{i18n.t('successSendingTitle')}</SuccessModal.Title>
-          <SuccessModal.Content>{i18n.t('successSendingText')}</SuccessModal.Content>
-          <SuccessModal.Bottons handleClose={closeSuccessModal}>
+        successModalIsOpen && <SuccessModal handleClose={closeSuccessModal} isOpen={successModalIsOpen}>
+          <SuccessModal.Title handleClose={closeSuccessModal}>
+            {i18n.t('successSendingTitle')}
+          </SuccessModal.Title>
+          <SuccessModal.Content>
             {i18n.t('successSendingText')}
-          </SuccessModal.Bottons>
+          </SuccessModal.Content>
+          <SuccessModal.Buttons handleClose={closeSuccessModal}>
+            {i18n.t('successSendingText')}
+          </SuccessModal.Buttons>
         </SuccessModal>
       }
     </div>

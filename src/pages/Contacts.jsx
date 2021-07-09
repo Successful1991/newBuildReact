@@ -1,9 +1,9 @@
 import React from "react";
 import Head from 'next/head';
 import styles from '../styles/Contacts.module.scss';
-import { Header } from '../components/UI/Header/Header';
-import { Footer } from '../components/UI/Footer/Footer';
-import { CustomForm } from '../components/Form/Form';
+import { Header } from '../containers/Header/Header';
+import { Footer } from '../containers/Footer/Footer';
+import { CustomForm } from '../containers/Form/Form';
 
 export default function Contacts({ containerRef }) {
   return (

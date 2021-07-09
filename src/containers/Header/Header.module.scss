@@ -1,8 +1,10 @@
 .header {
+  position: relative;
   align-self: flex-start;
   background: green;
   height: 50px;
   transition: all 0.4s ease-in-out;
+  z-index: 30;
 }
 
 .header__big{

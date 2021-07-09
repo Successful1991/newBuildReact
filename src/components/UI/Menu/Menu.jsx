@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { TimelineLite } from 'gsap';
 import BezierEasing from 'bezier-easing';
+import Link from 'next/link';
 
 import cn from 'classnames';
 import css from './Menu.module.scss';
@@ -17,6 +18,9 @@ const customStyles = {
     width: '100%',
     margin: '0',
     transform: 'none',
+  },
+  overlay: {
+    zIndex: 2000,
   }
 };
 
@@ -27,7 +31,12 @@ export class Menu extends React.Component {
       modalIsOpen: false,
     };
     this.links = [
-      'home', 'contacts', 'about', 'gallery'
+      {url: '/',
+      name: 'главная'},
+      {url: 'Contacts',
+      name: 'контакты'},
+      {url: 'Infrastructure',
+      name: 'локация'},
     ];
     this.linkElements = [];
     this.myTween = new TimelineLite({paused: true});
@@ -48,7 +57,7 @@ export class Menu extends React.Component {
   };
 
   render() {
-  const menuClasses = cn('customStyles', {'open': this.state.modalIsOpen} );
+  const menuClasses = cn(css.customStyles, {'open': this.state.modalIsOpen} );
     return <>
       <button className={css.burger} onClick={this.openModal}>Trigger Modal</button>
       <Modal
@@ -65,10 +74,13 @@ export class Menu extends React.Component {
           <ul>
             {this.links.map((link, i) => <li
               className={css.link}
-              key={link}
+              key={link.url}
               ref={li => this.linkElements[i] = li}
             >
-              {link}</li>)}
+              <Link href={link.url}>
+                <a>{link.name}</a>
+              </Link>
+            </li>)}
           </ul>
         </div>
         <div className='menu_footer' />

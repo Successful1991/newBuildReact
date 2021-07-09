@@ -1,11 +1,11 @@
 import React from "react";
 import Head from 'next/head';
-import { useLocomotiveScroll } from 'react-locomotive-scroll';
+// import { useLocomotiveScroll } from 'react-locomotive-scroll';
 import styles from '../styles/Infrastructure.module.scss';
-import 'locomotive-scroll/dist/locomotive-scroll.css';
-import { Header } from '../components/UI/Header/Header';
-import { Footer } from '../components/UI/Footer/Footer';
-import { Map } from '../components/Map/Map';
+// import 'locomotive-scroll/dist/locomotive-scroll.css';
+import { Header } from '../containers/Header/Header';
+import { Footer } from '../containers/Footer/Footer';
+import { Map } from '../containers/Map/Map';
 
 export default function Infrastructure({ containerRef }) {
   const mainMap = {lat: 50.485010, lng: 30.530143};

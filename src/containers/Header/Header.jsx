@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { useLocomotiveScroll } from 'react-locomotive-scroll';
 import css from './Header.module.scss';
 // eslint-disable-next-line import/named
-import { Menu } from '../Menu/Menu';
+import { Menu } from '../../components/UI/Menu/Menu';
 
 export const Header = () => {
 	const { scroll } = useLocomotiveScroll();

@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import InputLabel from "@material-ui/core/InputLabel/InputLabel";
-import NativeSelect from "@material-ui/core/NativeSelect/NativeSelect";
+import InputLabel from "@material-ui/core/InputLabel";
+import NativeSelect from "@material-ui/core/NativeSelect";
 import FormControl from "@material-ui/core/FormControl";
 import cn from 'classnames';
 import css from './Select.module.scss';
+
 
 export const Select = ({ children, selectId, handleChange }) => {
   return (
@@ -14,6 +15,7 @@ export const Select = ({ children, selectId, handleChange }) => {
         value={selectId}
         onChange={handleChange}
         name="camers"
+        
       >
         {children}
       </NativeSelect>

@@ -6,6 +6,11 @@ export const constructionService = {
 			.then(resp => resp.data);
 	},
 
+	getFlats() {
+		return axios.get('http://api.spinhouse.space/wp-json/myplugin/v1/flats/')
+		// return axios.get('public/flats.json')
+	},
+
 	getNote(id) {
 		const data = {
 			id,
