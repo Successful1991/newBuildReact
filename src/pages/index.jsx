@@ -16,17 +16,6 @@ import styles from '../styles/Home.module.scss';
 
 export default function Home({ flats }) {
   const [filteredFlats, setFilteredFlats] = useState([]);
-  // const { scroll } = useLocomotiveScroll()
-  // useEffect(() => {
-  // //   // getServerSideProps(context)
-  // //   const jssStyles = document.querySelector('#jss-server-side');
-  // //   if (jssStyles) {
-  // //     jssStyles.parentElement.removeChild(jssStyles);
-  // //   }
-  //   if(scroll) {
-  //     scroll.update()
-  //   }
-  // })
   
   return (
     <div className={styles.container} data-scroll-container id='app'>

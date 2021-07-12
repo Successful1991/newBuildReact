@@ -8,24 +8,27 @@ import theme from '../theme';
 import 'locomotive-scroll/dist/locomotive-scroll.css';
 
 function MyApp({ Component, pageProps }) {
-  // const containerRef = useRef(null);
-  // const { scroll } = useLocomotiveScroll()
   useEffect(() => {
+    let scroll = null;
     import('locomotive-scroll').then((locomotiveModule) => {
+
       // eslint-disable-next-line new-cap
-      const scroll = new locomotiveModule.default({
+      scroll = new locomotiveModule.default({
         el: document.querySelector("[data-scroll-container]"),
         smooth: true,
         resetNativeScroll: true
       });
-      
-      scroll.destroy();
-    
+
       setTimeout(() => {
         scroll.init();
       }, 100);
     });
-  })
+    
+    return () => {
+      scroll.destroy();
+      document.querySelector('.c-scrollbar').remove()
+    }
+  });
 
   return (
       <ThemeProvider theme={theme}>
