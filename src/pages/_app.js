@@ -1,7 +1,6 @@
 import 'normalize.css';
 import '../styles/globals.css';
-import { LocomotiveScrollProvider } from "react-locomotive-scroll";
-import React, {useRef} from "react";
+import React, {useEffect} from "react";
 import Head from "next/dist/next-server/lib/head";
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -9,12 +8,26 @@ import theme from '../theme';
 import 'locomotive-scroll/dist/locomotive-scroll.css';
 
 function MyApp({ Component, pageProps }) {
-  const containerRef = useRef(null);
+  // const containerRef = useRef(null);
+  // const { scroll } = useLocomotiveScroll()
+  useEffect(() => {
+    import('locomotive-scroll').then((locomotiveModule) => {
+      // eslint-disable-next-line new-cap
+      const scroll = new locomotiveModule.default({
+        el: document.querySelector("[data-scroll-container]"),
+        smooth: true,
+        resetNativeScroll: true
+      });
+      
+      scroll.destroy();
+    
+      setTimeout(() => {
+        scroll.init();
+      }, 100);
+    });
+  })
+
   return (
-    <LocomotiveScrollProvider
-      options={{ smooth: true }}
-      watch={[pageProps.flats]}
-      containerRef={containerRef}>
       <ThemeProvider theme={theme}>
         <Head>
           <title>Construction</title>
@@ -24,7 +37,6 @@ function MyApp({ Component, pageProps }) {
         <CssBaseline />
         <Component {...pageProps}/>
       </ThemeProvider>
-    </LocomotiveScrollProvider>
   )
 }
 

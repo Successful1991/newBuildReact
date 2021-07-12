@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import uniqueId from 'lodash/uniqueId';
+// import { useLocomotiveScroll } from 'react-locomotive-scroll'
 import { Card } from "../components/UI/Card";
 // import axios from "axios";
 
@@ -13,18 +14,22 @@ import { Filter } from '../components/UI/Filter/Filter';
 // import 'locomotive-scroll/dist/locomotive-scroll.css';
 import styles from '../styles/Home.module.scss';
 
-export default function Home({ containerRef, flats }) {
+export default function Home({ flats }) {
   const [filteredFlats, setFilteredFlats] = useState([]);
-  useEffect(() => {
-  //   // getServerSideProps(context)
-  //   const jssStyles = document.querySelector('#jss-server-side');
-  //   if (jssStyles) {
-  //     jssStyles.parentElement.removeChild(jssStyles);
+  // const { scroll } = useLocomotiveScroll()
+  // useEffect(() => {
+  // //   // getServerSideProps(context)
+  // //   const jssStyles = document.querySelector('#jss-server-side');
+  // //   if (jssStyles) {
+  // //     jssStyles.parentElement.removeChild(jssStyles);
+  // //   }
+  //   if(scroll) {
+  //     scroll.update()
   //   }
-  })
+  // })
   
   return (
-    <div className={styles.container} data-scroll-container ref={containerRef} id='app'>
+    <div className={styles.container} data-scroll-container id='app'>
       <Header />
       <section className={styles.main} data-scroll-section>
         <h1 data-scroll className={styles.title}>Starting template</h1>

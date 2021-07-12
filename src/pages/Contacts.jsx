@@ -14,7 +14,7 @@ export default function Contacts({ containerRef }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main>
+      <main data-scroll-section>
         <h1>Contact Template</h1>
         <CustomForm />
       </main>
