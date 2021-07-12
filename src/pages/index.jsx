@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import uniqueId from 'lodash/uniqueId';
 // import { useLocomotiveScroll } from 'react-locomotive-scroll'
 import { Card } from "../components/UI/Card";
