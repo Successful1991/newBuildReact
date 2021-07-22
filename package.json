@@ -33,6 +33,7 @@
     "react-query": "^3.16.0",
     "react-use": "^17.2.4",
     "sass": "^1.34.0",
+    "swiper": "^6.8.0",
     "yup": "^0.32.9"
   },
   "devDependencies": {

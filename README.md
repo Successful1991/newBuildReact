@@ -19,6 +19,7 @@
 - [classnames](https://www.npmjs.com/package/classnames) - удобно миксовать классы
 - [react-use](https://github.com/streamich/react-use) - кучу готовых хуков чтобы не придумывать велосипед
 - [React Query](https://react-query.tanstack.com/installation) - удобная работа с запросами. Кеширует ваши запросы, дабы повторно их не исполнять.
+- [Swiper React Component](https://swiperjs.com/react) - Многофункциональный слайдер.
 
 ## ~~Redux~~
 
