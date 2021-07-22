@@ -27,8 +27,8 @@ function Gallery({ containerRef, posts, title }) {
                 spaceBetween={0}
                 navigation
                 slidesPerView={1}
-                onSlideChange={() => console.log('slide change')}
-                onSwiper={(swiper) => console.log(swiper)}
+                onSlideChange={() => {}}
+                onSwiper={() => {}}
               >
                 {posts.map((post, index) => (
                       <SwiperSlide>
