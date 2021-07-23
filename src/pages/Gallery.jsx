@@ -31,7 +31,7 @@ function Gallery({ containerRef, posts, title }) {
                 onSwiper={() => {}}
               >
                 {posts.map((post, index) => (
-                      <SwiperSlide>
+                      <SwiperSlide key={index}>
                         <img  
                           className={styles['swiper-image']} 
                           alt="some" key={index} 
