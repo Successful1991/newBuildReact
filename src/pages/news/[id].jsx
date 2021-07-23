@@ -21,7 +21,7 @@ function SingleNews({ containerRef, title, /* img */ }) {
             <Container maxWidth="sm">
                 <h1>{title}</h1>
 
-                <Button variant="outlined" href="/news.html">Назад</Button>
+                <Button variant="outlined" href="/news">Назад</Button>
                 {/* <img alt={title} src={img}/> */}
             </Container>
         </main>
