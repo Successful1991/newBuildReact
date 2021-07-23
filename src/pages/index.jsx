@@ -12,6 +12,7 @@ import { Filter } from '../components/UI/Filter/Filter';
 
 // import 'locomotive-scroll/dist/locomotive-scroll.css';
 import styles from '../styles/Home.module.scss';
+
 export default function Home({ flats }) {
   const [filteredFlats, setFilteredFlats] = useState([]);
   
@@ -33,7 +34,7 @@ export default function Home({ flats }) {
   );
 }
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(/* context */) {
   const { data } = await constructionService.getFlats();
   return {
     props: {
