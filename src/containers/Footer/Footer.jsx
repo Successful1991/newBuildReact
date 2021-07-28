@@ -1,11 +1,14 @@
 import React from 'react';
-import cn from 'classnames';
 import css from './Footer.module.scss';
 
-export const Footer = () => {
-	return (
-		<footer className={css.footer}>
+export const Footer = React.forwardRef((props, ref) => (
+		<footer className={css.footer} ref={ref}>
+			Footer
+			Footer
+			Footer
+			Footer
+			Footer
+			Footer
 			Footer
 		</footer>
-	);
-};
+	));

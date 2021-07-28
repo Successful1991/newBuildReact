@@ -37,10 +37,14 @@ export class Menu extends React.Component {
       name: 'контакты'},
       {url: 'Infrastructure',
       name: 'локация'},
+      {url: 'news',
+      name: 'Новини'},
+      {url: 'Gallery',
+      name: 'Галерея'},
     ];
     this.linkElements = [];
     this.myTween = new TimelineLite({paused: true});
-  }
+  };
   
   openModal = () => {
     this.setState({ modalIsOpen: true });
