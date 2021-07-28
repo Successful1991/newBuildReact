@@ -18,6 +18,8 @@ import styles from '../styles/Home.module.scss';
 
 export default function Home({ flats }) {
   const [filteredFlats, setFilteredFlats] = useState([]);
+
+  /* Начало логики анимации при попадании в область видимости */
   const [triggerOnce, setTriggerOnce] = useState(false);
   const ref1 = useRef(null);
   const intersection = useIntersection(ref1, {
@@ -28,14 +30,15 @@ export default function Home({ flats }) {
   });
   useEffect(() => {
     if (intersection && triggerOnce === true) return false;
-    if (intersection && intersection.triggerOnce !== true) intersection.triggerOnce = false;
-    if (intersection 
-      && intersection.isIntersecting 
-      && ref1.current !== null) {
+    if (    intersection 
+        && intersection.isIntersecting 
+        && ref1.current !== null
+      ) {
       setTriggerOnce(true);
       gsap.from(ref1.current, { y: -500 });
     }
-  }, [intersection])
+  }, [intersection]);
+  /* Конец логики анимации при попадании в область видимости */
   return (
     <div className={styles.container} data-scroll-container id='app'>
       <Header />

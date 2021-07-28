@@ -1,10 +1,9 @@
 import React from 'react';
-import PropTypes from "prop-types";
-import cn from 'classnames';
+// import PropTypes from "prop-types";
+// import cn from 'classnames';
 import css from './TabContent.module.scss';
 
-export const TabContent = ({ children, selectId, index }) => {
-  return (
+export const TabContent = ({ children, selectId, index }) => (
     <div
       role="tabpanel"
       hidden={selectId !== index}
@@ -17,5 +16,4 @@ export const TabContent = ({ children, selectId, index }) => {
       )}
     </div>
   );
-};
 
