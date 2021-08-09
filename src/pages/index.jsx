@@ -1,10 +1,11 @@
 import React, {useState, useRef, useEffect} from 'react';
 import uniqueId from 'lodash/uniqueId';
 import gsap from 'gsap';
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { useIntersection } from 'react-use';
+import { useLocomotiveScroll } from 'react-locomotive-scroll';
 import { Card } from "../components/UI/Card";
 // import axios from "axios";
-
 import { SelectTab } from '../components/SelectTab/SelectTab';
 import { constructionService } from "../services/construction.service";
 import { Header } from '../containers/Header/Header';
@@ -17,7 +18,39 @@ import styles from '../styles/Home.module.scss';
 
 
 export default function Home({ flats }) {
+  gsap.registerPlugin(ScrollTrigger);
   const [filteredFlats, setFilteredFlats] = useState([]);
+  const refFilter = useRef(null);
+  const { scroll } = useLocomotiveScroll();
+  useEffect(() => {
+
+    if (scroll !== null) {
+      scroll.on('scroll', ScrollTrigger.update);
+      ScrollTrigger.scrollerProxy(document.body, {
+        scrollTop(value) {
+          return arguments.length ? scroll.scrollTo(value, 0, 0) : scroll.scroll.instance.scroll.y;
+        }, // we don't have to define a scrollLeft because we're only scrolling vertically.
+        getBoundingClientRect() {
+          return {top: 0, left: 0, width: window.innerWidth, height: window.innerHeight};
+        }
+      });
+      ScrollTrigger.refresh();
+      gsap.timeline({ 
+        scrollTrigger: {
+          trigger: refFilter.current,
+          scrub: 0.6,
+          start: '0% 90%',
+          end: '100% 70%'
+        }
+      })
+      .to(refFilter.current, { backgroundColor: 'green' })
+    }
+    // console.log();
+  }, [scroll])
+  // console.log(scroll);
+  useEffect(() => {
+    
+  }, []);
 
   /* Начало логики анимации при попадании в область видимости */
   const [triggerOnce, setTriggerOnce] = useState(false);
@@ -37,7 +70,7 @@ export default function Home({ flats }) {
       setTriggerOnce(true);
       gsap.from(ref1.current, { y: -500 });
     }
-  }, [intersection]);
+  }, [intersection, triggerOnce]);
   /* Конец логики анимации при попадании в область видимости */
   return (
     <div className={styles.container} data-scroll-container id='app'>
@@ -46,7 +79,7 @@ export default function Home({ flats }) {
         <h1 data-scroll className={styles.title}>Starting template</h1>
         <SelectTab />
         <Filter flats={flats} setFilteredFlats={setFilteredFlats}/>
-        <div className={styles.cards} >
+        <div ref={refFilter} className={styles.cards} >
           {
             filteredFlats.map(flat => <Card key={uniqueId()} {...flat} />)
           }
