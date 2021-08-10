@@ -11,3 +11,15 @@
   width: 100vw;
   height: 100vh;
 }
+
+.full-screen {
+  width: 100vw;
+  height: 100vh;
+  background-color: purple;
+  border: 1px solid turquoise;
+  display: flex;
+  justify-content: center;align-items: center;
+  h1 {
+    display: inline-block;
+  }
+}
