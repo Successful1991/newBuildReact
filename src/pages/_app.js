@@ -4,7 +4,7 @@ import React, { useRef } from "react";
 import Head from "next/dist/next-server/lib/head";
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { LocomotiveScrollProvider } from 'react-locomotive-scroll'
+// import { LocomotiveScrollProvider } from 'react-locomotive-scroll'
 import theme from '../theme';
 import 'locomotive-scroll/dist/locomotive-scroll.css';
 
@@ -42,7 +42,7 @@ function MyApp({ Component, pageProps }) {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <CssBaseline />
-        <LocomotiveScrollProvider
+        {/* <LocomotiveScrollProvider
             options={
               {
                 smooth: true,
@@ -55,9 +55,9 @@ function MyApp({ Component, pageProps }) {
               ]
             }
             // containerRef={containerRef}
-          >
+          > */}
         <Component ref={containerRef} {...pageProps} />
-        </LocomotiveScrollProvider>
+        {/* </LocomotiveScrollProvider> */}
       </ThemeProvider>
   )
 }
