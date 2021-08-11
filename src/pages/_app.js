@@ -1,18 +1,23 @@
 /* eslint-disable no-unused-vars */
 import 'normalize.css';
 import '../styles/globals.css';
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef, useLayoutEffect  } from "react";
 import Head from "next/dist/next-server/lib/head";
 import gsap from 'gsap';
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { ThemeProvider } from '@material-ui/core/styles';
+import { useUpdateEffect } from 'react-use';
 import CssBaseline from '@material-ui/core/CssBaseline';
 // import { LocomotiveScrollProvider } from 'react-locomotive-scroll'
 import { useRouter } from 'next/router';
 import theme from '../theme';
+
 import 'locomotive-scroll/dist/locomotive-scroll.css';
 
 function MyApp({ Component, pageProps }) {
+  const refLoco = useRef(null);
+  const router = useRouter()
+  const [scrollLoco, setScrollLoco] = useState(null);
   // const router = useRouter();
   // const [scrall, setScrall] = useState(null);
   // useEffect((el) => {
@@ -45,28 +50,50 @@ function MyApp({ Component, pageProps }) {
   //     console.log(scrall);
   //   }
   // }, [router])
+  gsap.registerPlugin(ScrollTrigger);
   useEffect(() => {
     let scroll = null;
+    if (scrollLoco !== null) return;
     import('locomotive-scroll').then((locomotiveModule) => {
-
+      
       // eslint-disable-next-line new-cap
-      scroll = new locomotiveModule.default({
-        el: document.querySelector("[data-scroll-container]"),
+      scroll = new locomotiveModule.Smooth({
+        el: refLoco.current,
         smooth: true,
-        resetNativeScroll: true
+        // resetNativeScroll: true
       });
       React.createContext(scroll);
+      setScrollLoco(scroll);
+      scroll.on('scroll', ScrollTrigger.update);
+      scroll.on('scroll', () => {
+      });
+     ScrollTrigger.scrollerProxy(refLoco.current, {
+          scrollTop(value) {
+            return arguments.length ? scroll.scrollTo(value, 0, 0) : scroll.scroll.instance.scroll.y;
+          }, // we don't have to define a scrollLeft because we're only scrolling vertically.
+          getBoundingClientRect() {
+            return {top: 0, left: 0, width: window.innerWidth, height: window.innerHeight};
+          }
+        });
+        ScrollTrigger.refresh();
+        ScrollTrigger.update();
       setTimeout(() => {
-        scroll.init();
+        // scroll.init();
+        
       }, 100);
     });
     
     return () => {
-      scroll.destroy();
-      document.querySelector('.c-scrollbar').remove()
+      // scroll.destroy();
+      // document.querySelector('.c-scrollbar').remove()
     }
-  });
-
+  }, []);
+  useUpdateEffect(() => {
+    // refLoco.current.style.transform = '';
+    if (scrollLoco !== null) {
+      scrollLoco.update();
+    }
+  })
   return (
     <ThemeProvider theme={theme}>
       <Head>
@@ -75,9 +102,14 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <CssBaseline />
-      {/* <LocoContext.Provider value={ctx}> */}
-        <Component gsap={gsap} ScrollTrigger={ScrollTrigger} {...pageProps}/>
-      {/* </LocoContext.Provider> */}
+      <div ref={refLoco} >
+        <button style={{position: 'fixed', zIndex: 100}} onClick={() => {
+          if (scrollLoco !== null) {
+            scrollLoco.update();
+          } 
+        }}>Update</button>
+        <Component gsap={gsap} ScrollTrigger={ScrollTrigger} scroll={scrollLoco} {...pageProps}/>
+      </div>
     </ThemeProvider>
 )
 }
