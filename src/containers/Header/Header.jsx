@@ -1,5 +1,5 @@
 import React, { useEffect, useState} from 'react';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import cn from 'classnames';
 import { useLocomotiveScroll } from 'react-locomotive-scroll';
 import css from './Header.module.scss';
@@ -7,7 +7,7 @@ import css from './Header.module.scss';
 import { Menu } from '../../components/UI/Menu/Menu';
 import { Langs } from '../../components/Langs/Langs';
 
-export const Header = () => {
+export const Header = ({ translate }) => {
 	const { scroll } = useLocomotiveScroll();
 	const router = useRouter();
 	// const { scroll } = useContext(SmoothScrollContext);
@@ -25,6 +25,7 @@ export const Header = () => {
 	return (
 		<header className={headerClassList}>
 			шапка
+			{typeof translate === 'function' && translate('change-locale')}
 			<Langs router={router}/>
 			<Menu/>
 		</header>

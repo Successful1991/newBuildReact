@@ -2,6 +2,8 @@ import React, {useState, useRef, useEffect} from 'react';
 import uniqueId from 'lodash/uniqueId';
 import gsap from 'gsap';
 import { useIntersection } from 'react-use';
+import { useTranslation } from 'next-i18next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Card } from "../components/UI/Card";
 // import axios from "axios";
 import { SelectTab } from '../components/SelectTab/SelectTab';
@@ -18,6 +20,7 @@ import styles from '../styles/Home.module.scss';
 export default function Home({ flats }) {
   const [filteredFlats, setFilteredFlats] = useState([]);
   const refFilter = useRef(null);
+  const { t } = useTranslation('common');
   /* Начало логики анимации при попадании в область видимости */
   const [triggerOnce, setTriggerOnce] = useState(false);
   const ref1 = useRef(null);
@@ -40,7 +43,7 @@ export default function Home({ flats }) {
   /* Конец логики анимации при попадании в область видимости */
   return (
     <div className={styles.container} data-scroll-container id='app'>
-      <Header />
+      <Header translate={t}/>
       <section className={styles.main}>
         <h1 data-scroll className={styles.title}>Starting template</h1>
         <SelectTab />
@@ -56,11 +59,12 @@ export default function Home({ flats }) {
   );
 }
 
-export async function getStaticProps(/* context */) {
+export async function getStaticProps({locale}) {
   const { data } = await constructionService.getFlats();
   return {
     props: {
       flats: data,
+      ...await serverSideTranslations(locale, ['common']),
     }, // will be passed to the page component as props
   }
 }

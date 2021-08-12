@@ -4,7 +4,7 @@ import React from 'react';
 import css from './Langs.module.scss';
 
 export const Langs = ({ router }) => {
-  const { locale, locales } = router;
+  const { locale, locales, defaultLocale } = router;
   const langsWithoutDefault = locales.filter(lang => lang !== locale);
   return (
     <div className={css['langs-header']}>
@@ -17,7 +17,10 @@ export const Langs = ({ router }) => {
             <li 
               className={lang === locale ? css.active: ''} 
               key={lang}>
+              {lang === defaultLocale ? 
+              <a locale={false} href={`${router.asPath}`}>{lang}</a> :
               <a href={`/${lang}${router.asPath}`}>{lang}</a>
+              }
             </li>
           ))}
         
