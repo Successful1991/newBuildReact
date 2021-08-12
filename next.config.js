@@ -3,8 +3,14 @@ const { PHASE_PRODUCTION_BUILD, PHASE_DEVELOPMENT_SERVER } = require('next/const
 const { withPlugins, optional } = require('next-compose-plugins');
 
 const nextConfig = {
+  i18n: {
+    locales: ['ua', 'ru', 'en'],
+    defaultLocale: 'ua',
+  },
   sassOptions: {
-    prependData: `@import "src/styles/mixins/index.scss"; @import "src/styles/variables/index.scss";`,
+    prependData: `
+    @import "src/styles/mixins/index.scss"; 
+    @import "src/styles/variables/index.scss";`,
   },
   webpack: (config) => {
     config.module.rules.unshift({

@@ -5,6 +5,11 @@
   height: 50px;
   transition: all 0.4s ease-in-out;
   z-index: 30;
+  display: flex;
+  align-items: center;
+  &>* {
+    margin-right: auto;
+  }
 }
 
 .header__big{

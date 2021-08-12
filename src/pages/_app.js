@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import 'normalize.css';
 import '../styles/globals.css';
+import '../styles/reset/reset.css';
 import React, { useEffect, useState } from "react";
 import Head from "next/dist/next-server/lib/head";
 import gsap from 'gsap';
