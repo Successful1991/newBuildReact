@@ -48,27 +48,27 @@ function MyApp({ Component, pageProps }) {
   //     console.log(scrall);
   //   }
   // }, [router])
-  useEffect(() => {
-    let scroll = null;
-    import('locomotive-scroll').then((locomotiveModule) => {
+  // useEffect(() => {
+  //   let scroll = null;
+  //   import('locomotive-scroll').then((locomotiveModule) => {
 
-      // eslint-disable-next-line new-cap
-      scroll = new locomotiveModule.default({
-        el: document.querySelector("[data-scroll-container]"),
-        smooth: true,
-        resetNativeScroll: true
-      });
-      React.createContext(scroll);
-      setTimeout(() => {
-        scroll.init();
-      }, 100);
-    });
+  //     // eslint-disable-next-line new-cap
+  //     scroll = new locomotiveModule.default({
+  //       el: document.querySelector("[data-scroll-container]"),
+  //       smooth: true,
+  //       resetNativeScroll: true
+  //     });
+  //     React.createContext(scroll);
+  //     setTimeout(() => {
+  //       scroll.init();
+  //     }, 100);
+  //   });
     
-    return () => {
-      scroll.destroy();
-      document.querySelector('.c-scrollbar').remove()
-    }
-  });
+  //   return () => {
+  //     scroll.destroy();
+  //     document.querySelector('.c-scrollbar').remove()
+  //   }
+  // });
 
   return (
     <ThemeProvider theme={theme}>

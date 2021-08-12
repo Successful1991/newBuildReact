@@ -104,6 +104,7 @@ export async function getStaticProps({ locale }) {
     // You can use any data fetching library
     const res = await getGallery(locale);
     const posts = await res.data;
+
     // const array = Object.keys(posts.routes);
     // By returning { props: { posts } }, the Blog component
     // will receive `posts` as a prop at build time

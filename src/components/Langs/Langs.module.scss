@@ -53,17 +53,17 @@
 	&:hover {
 		overflow: visible;
 	}
-	@include from(1680px){
-		width: 25px;
-	}
-	@include to(575px){
-		display: none;	
-	}
-	@include from(951px){
-		a:hover {
-			color: gold;		
-		}
-	}
+	// @include from(1680px){
+	// 	width: 25px;
+	// }
+	// @include to(575px){
+	// 	display: none;	
+	// }
+	// @include from(951px){
+	// 	a:hover {
+	// 		color: gold;		
+	// 	}
+	// }
 }
 
 .active {

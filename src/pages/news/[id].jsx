@@ -1,5 +1,6 @@
 import React from "react";
 import Head from 'next/head';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { Container, Button } from '@material-ui/core';
 import styles from '../../styles/news.module.scss';
 import { Header } from '../../containers/Header/Header';
@@ -29,7 +30,7 @@ function SingleNews({ containerRef, title, /* img */ }) {
         </div>
     );
 }
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params, locale }) {
     const res = await getPosts(params.id).singleRequest;
     const post = await res.data;
     // const featuredImg = await getPosts(post.featured_media).getImg;
@@ -38,13 +39,14 @@ export async function getStaticProps({ params }) {
     return {
       props: { 
           title: post.title.rendered, 
-          content: post.content.rendered, 
+          content: post.content.rendered,
+          ...(await serverSideTranslations(locale, ["common"])),
         //   img, 
           date: post.date },
     };
   }
 
-export async function getStaticPaths() {
+export async function getStaticPaths({ locales }) {
   
     const res = await getPosts().request;
     const posts = res.data;
@@ -52,6 +54,11 @@ export async function getStaticPaths() {
     const paths = posts.map((post) => ({
       params: { id: post.id.toString() },
     }));
+    locales.forEach((locale, i) => {
+      posts.forEach((post, i) => {
+        paths.push({ params: { id: post.id.toString() }, locale })
+      });
+    });
     // We'll pre-render only these paths at build time.
     return { paths, fallback: false };
 }
