@@ -1,8 +1,8 @@
 {
-    "h1": "Gallery",
-    "change-locale": "Change Language",
+    "h1": "Gallery RU",
+    "change-locale": "Сменить язык",
     "to-second-page": "Zur zweiten Seite",
     "error-with-status": "Auf dem Server ist ein Fehler ({{statusCode}}) aufgetreten",
     "error-without-status": "Auf dem Server ist ein Fehler aufgetreten",
-    "title": "Hauptseite | next-i18next"
+    "title": "Главная страница"
   }

@@ -1,6 +1,6 @@
 import React from "react";
 import Head from 'next/head';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+// import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { Container, Button } from '@material-ui/core';
 import styles from '../../styles/news.module.scss';
 import { Header } from '../../containers/Header/Header';
@@ -40,7 +40,7 @@ export async function getStaticProps({ params, locale }) {
       props: { 
           title: post.title.rendered, 
           content: post.content.rendered,
-          ...(await serverSideTranslations(locale, ["common"])),
+          // ...(await serverSideTranslations(locale, ["common"])),
         //   img, 
           date: post.date },
     };

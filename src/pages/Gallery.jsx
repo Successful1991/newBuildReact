@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
 import Head from 'next/head';
 import SwiperCore, { Navigation } from 'swiper';
-import { useTranslation } from 'next-i18next'
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import useTranslation from 'next-translate/useTranslation'
+// import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Container } from '@material-ui/core';
 import styles from '../styles/Contacts.module.scss';
@@ -113,7 +113,7 @@ export async function getStaticProps({ locale }) {
         posts: posts.acf.block_2.gallery,
         title: posts.seo_title,
         other: posts,
-        ...await serverSideTranslations(locale, ['common']),
+        // ...await serverSideTranslations(locale, ['common']),
       },
     }
 }

@@ -3,8 +3,6 @@ import 'normalize.css';
 import '../styles/globals.css';
 import '../styles/reset/reset.css';
 import React, { useEffect, useState } from "react";
-import { appWithTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Head from "next/dist/next-server/lib/head";
 import gsap from 'gsap';
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
@@ -84,11 +82,5 @@ function MyApp({ Component, pageProps }) {
     </ThemeProvider>
 )
 }
-export async function getStaticProps({ locale }) {
-  return {
-    props: {
-      ...await serverSideTranslations(locale, ['common']),
-    },
-  }
-}
-export default appWithTranslation(MyApp);
+
+export default MyApp;

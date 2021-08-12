@@ -1,10 +1,14 @@
 /* eslint-disable global-require */
 const { PHASE_PRODUCTION_BUILD, PHASE_DEVELOPMENT_SERVER } = require('next/constants');
 const { withPlugins, optional } = require('next-compose-plugins');
-const { i18n } = require('./next-i18next.config');
+const nextTranslate = require('next-translate');
 
-const nextConfig = {
-  i18n,
+const nextConfig = nextTranslate({
+  i18n: {
+    locales: ['ua', 'ru','en', ],
+    defaultLocale: 'ua',
+    
+  },
   sassOptions: {
     prependData: `
     @import "src/styles/mixins/index.scss"; 
@@ -29,7 +33,7 @@ const nextConfig = {
     });
     return config;
   },
-};
+});
 
 module.exports = withPlugins(
   [

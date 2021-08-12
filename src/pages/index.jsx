@@ -2,8 +2,7 @@ import React, {useState, useRef, useEffect} from 'react';
 import uniqueId from 'lodash/uniqueId';
 import gsap from 'gsap';
 import { useIntersection } from 'react-use';
-import { useTranslation } from 'next-i18next'
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import useTranslation from 'next-translate/useTranslation'
 import { Card } from "../components/UI/Card";
 // import axios from "axios";
 import { SelectTab } from '../components/SelectTab/SelectTab';
@@ -45,7 +44,7 @@ export default function Home({ flats }) {
     <div className={styles.container} data-scroll-container id='app'>
       <Header translate={t}/>
       <section className={styles.main}>
-        <h1 data-scroll className={styles.title}>Starting template</h1>
+        <h1 data-scroll className={styles.title}>{t('title')}</h1>
         <SelectTab />
         <Filter flats={flats} setFilteredFlats={setFilteredFlats}/>
         <div ref={refFilter} className={styles.cards} >
@@ -59,12 +58,11 @@ export default function Home({ flats }) {
   );
 }
 
-export async function getStaticProps({locale}) {
+export async function getStaticProps({}) {
   const { data } = await constructionService.getFlats();
   return {
     props: {
       flats: data,
-      ...await serverSideTranslations(locale, ['common']),
     }, // will be passed to the page component as props
   }
 }

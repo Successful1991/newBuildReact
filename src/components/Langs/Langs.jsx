@@ -18,7 +18,7 @@ export const Langs = ({ router }) => {
               className={lang === locale ? css.active: ''} 
               key={lang}>
               {lang === defaultLocale ? 
-              <a locale={false} href={`${router.asPath}`}>{lang}</a> :
+              <a href={`${router.asPath}`}>{lang}</a> :
               <a href={`/${lang}${router.asPath}`}>{lang}</a>
               }
             </li>

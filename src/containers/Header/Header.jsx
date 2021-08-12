@@ -1,7 +1,8 @@
 import React, { useEffect, useState} from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { makeStyles } from '@material-ui/core/styles';
-import { useTranslation } from 'react-i18next';
+import useTranslation from 'next-translate/useTranslation'
 import cn from 'classnames';
 import { useLocomotiveScroll } from 'react-locomotive-scroll';
 import Button from '@material-ui/core/Button';
@@ -19,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const Header = ({ translate }) => {
 	const { scroll } = useLocomotiveScroll();
-	const { t } = useTranslation();
+	const { t } = useTranslation('common');
 	const router = useRouter();
 	const classes = useStyles();
 	// const { scroll } = useContext(SmoothScrollContext);
@@ -36,7 +37,24 @@ export const Header = ({ translate }) => {
 	const headerClassList = cn(css.header, { [css.header__big] : isOnTop});
 	return (
 		<header className={headerClassList}>
-			шапка
+			<div className="center-container">
+				<div>
+					<Link href="/" locale="en">
+					<a>Change to english</a>
+					</Link>
+				</div>
+				<div>
+					<Link href="/" locale="ua">
+					<a>Change to ua</a>
+					</Link>
+				</div>
+				<div>
+					<Link href="/" locale="ru">
+					<a>Change to ru</a>
+					</Link>
+				</div>
+			</div>
+
 
 			{typeof translate === 'function' && translate('change-locale')}
 			<Langs router={router}/>
