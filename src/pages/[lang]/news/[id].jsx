@@ -2,11 +2,12 @@ import React from "react";
 import Head from 'next/head';
 // import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { Container, Button } from '@material-ui/core';
-import styles from '../../styles/news.module.scss';
-import { Header } from '../../containers/Header/Header';
-import { Footer } from '../../containers/Footer/Footer';
+import styles from '../../../styles/news.module.scss';
+import { Header } from '../../../containers/Header/Header';
+import { Footer } from '../../../containers/Footer/Footer';
+import { locales } from '../../../translations/config';
 
-import getPosts from "../../services/posts.service";
+import getPosts from "../../../services/posts.service";
 
 
 function SingleNews({ containerRef, title, /* img */ }) {
@@ -30,7 +31,7 @@ function SingleNews({ containerRef, title, /* img */ }) {
         </div>
     );
 }
-export async function getStaticProps({ params, locale }) {
+export async function getStaticProps({ params }) {
     const res = await getPosts(params.id).singleRequest;
     const post = await res.data;
     // const featuredImg = await getPosts(post.featured_media).getImg;
@@ -46,19 +47,18 @@ export async function getStaticProps({ params, locale }) {
     };
   }
 
-export async function getStaticPaths({ locales }) {
+export async function getStaticPaths() {
   
     const res = await getPosts().request;
     const posts = res.data;
     // Get the paths we want to pre-render based on posts
-    const paths = posts.map((post) => ({
-      params: { id: post.id.toString() },
-    }));
-    locales.forEach((locale, i) => {
-      posts.forEach((post, i) => {
-        paths.push({ params: { id: post.id.toString() }, locale })
-      });
-    });
+    // const paths = posts.map((post) => ({
+    //   params: { id: post.id.toString() },
+    // }));
+    const paths = locales.flatMap((lang) => posts.map(
+      (post) => ({ params: { id: post.id.toString(), lang }})
+    ));
+
     // We'll pre-render only these paths at build time.
     return { paths, fallback: false };
 }

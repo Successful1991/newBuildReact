@@ -1,9 +1,10 @@
 import React from "react";
 import Head from 'next/head';
-import styles from '../styles/Contacts.module.scss';
-import { Header } from '../containers/Header/Header';
-import { Footer } from '../containers/Footer/Footer';
-import { CustomForm } from '../containers/Form/Form';
+import styles from '../../styles/Contacts.module.scss';
+import { Header } from '../../containers/Header/Header';
+import { Footer } from '../../containers/Footer/Footer';
+import { CustomForm } from '../../containers/Form/Form';
+import { getStaticPaths } from '../../translations/utils';
 
 export default function Contacts({ containerRef }) {
   return (
@@ -21,4 +22,12 @@ export default function Contacts({ containerRef }) {
       <Footer />
     </div>
   );
+}
+
+export { getStaticPaths };
+
+export async function getStaticProps() {
+  return {
+    props: {},
+  }
 }

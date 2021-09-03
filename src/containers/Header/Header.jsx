@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { makeStyles } from '@material-ui/core/styles';
@@ -11,6 +11,7 @@ import css from './Header.module.scss';
 // eslint-disable-next-line import/named
 import { Menu } from '../../components/UI/Menu/Menu';
 import { Langs } from '../../components/Langs/Langs';
+import { LocalizedLink } from '../../components/UI/LocalizedLink';
 
 const useStyles = makeStyles((theme) => ({
 	button: {
@@ -39,19 +40,19 @@ export const Header = ({ translate }) => {
 		<header className={headerClassList}>
 			<div className="center-container">
 				<div>
-					<Link href="/" locale="en">
-					<a>Change to english</a>
-					</Link>
+					<LocalizedLink href="/" locale="en">
+						<a>Change to english</a>
+					</LocalizedLink>
 				</div>
 				<div>
-					<Link href="/" locale="ua">
-					<a>Change to ua</a>
-					</Link>
+					<LocalizedLink href="/" locale="ua">
+						<a>Change to ua</a>
+					</LocalizedLink>
 				</div>
 				<div>
-					<Link href="/" locale="ru">
-					<a>Change to ru</a>
-					</Link>
+					<LocalizedLink href="/" locale="ru">
+						<a>Change to ru</a>
+					</LocalizedLink>
 				</div>
 			</div>
 
@@ -63,7 +64,9 @@ export const Header = ({ translate }) => {
 				color="secondary"
 				className={classes.button}
 				endIcon={<BurgerIcon style={{ width: '10px', height: '10px' }}/>}
-			>{t('change-locale')}</Button>
+			>
+				{t('change-locale')}
+			</Button>
 			<Menu/>
 		</header>
 	);

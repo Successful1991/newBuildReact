@@ -2,13 +2,15 @@
 import React from "react";
 import axios from "axios";
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 // import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardContent, Typography, Button } from '@material-ui/core';
-import styles from '../styles/news.module.scss';
-import { Header } from '../containers/Header/Header';
-import { Footer } from '../containers/Footer/Footer';
-import { Main } from '../containers/Main/Main';
-import getPosts from '../services/posts.service';
+import styles from '../../../styles/news.module.scss';
+import { Header } from '../../../containers/Header/Header';
+import { Footer } from '../../../containers/Footer/Footer';
+import { Main } from '../../../containers/Main/Main';
+import getPosts from '../../../services/posts.service';
+import { getStaticPaths } from '../../../translations/utils';
 
 
 // const useStyles = makeStyles({
@@ -28,7 +30,7 @@ import getPosts from '../services/posts.service';
 //   },
 // });
 function News({ containerRef, posts, title, categorie, info, ...props}) {
-
+  const { asPath } = useRouter();
   // const classes = useStyles();
   return (
     <div className={styles.container} data-scroll-container ref={containerRef} id='app'>
@@ -46,7 +48,7 @@ function News({ containerRef, posts, title, categorie, info, ...props}) {
               <Typography color="textSecondary" gutterBottom>
                 {el.title.rendered}
               </Typography>
-              <Button href={`${categorie}/${el.id}`}>Перейти</Button>
+              <Button href={`${asPath}${el.id}`}>Перейти</Button>
             </CardContent>
           </Card>
         ))}
@@ -74,5 +76,7 @@ export async function getStaticProps() {
     },
   }
 }
+
+export { getStaticPaths };
 
 export default News;

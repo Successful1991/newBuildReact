@@ -3,17 +3,18 @@ import uniqueId from 'lodash/uniqueId';
 import gsap from 'gsap';
 import { useIntersection } from 'react-use';
 import useTranslation from 'next-translate/useTranslation'
-import { Card } from "../components/UI/Card";
+import { Card } from "../../components/UI/Card";
 // import axios from "axios";
-import { SelectTab } from '../components/SelectTab/SelectTab';
-import { constructionService } from "../services/construction.service";
-import { Header } from '../containers/Header/Header';
-import { Footer } from '../containers/Footer/Footer';
+import { SelectTab } from '../../components/SelectTab/SelectTab';
+import { constructionService } from "../../services/construction.service";
+import { Header } from '../../containers/Header/Header';
+import { Footer } from '../../containers/Footer/Footer';
 // eslint-disable-next-line import/named
-import { Filter } from '../components/UI/Filter/Filter';
+import { Filter } from '../../components/UI/Filter/Filter';
+import { getStaticPaths } from '../../translations/utils';
 
 // import 'locomotive-scroll/dist/locomotive-scroll.css';
-import styles from '../styles/Home.module.scss';
+import styles from '../../styles/Home.module.scss';
 
 
 export default function Home({ flats }) {
@@ -29,6 +30,7 @@ export default function Home({ flats }) {
     threshold: 1,
     triggerOnce: false,
   });
+
   useEffect(() => {
     if (intersection && triggerOnce === true) return false;
     if (    intersection 
@@ -40,6 +42,7 @@ export default function Home({ flats }) {
     }
   }, [intersection, triggerOnce]);
   /* Конец логики анимации при попадании в область видимости */
+
   return (
     <div className={styles.container} data-scroll-container id='app'>
       <Header translate={t}/>
@@ -58,7 +61,9 @@ export default function Home({ flats }) {
   );
 }
 
-export async function getStaticProps({}) {
+export { getStaticPaths };
+
+export async function getStaticProps() {
   const { data } = await constructionService.getFlats();
   return {
     props: {

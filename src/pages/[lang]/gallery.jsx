@@ -5,11 +5,12 @@ import useTranslation from 'next-translate/useTranslation'
 // import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Container } from '@material-ui/core';
-import styles from '../styles/Contacts.module.scss';
+import styles from '../../styles/Contacts.module.scss';
 import 'swiper/swiper-bundle.css';
-import { Header } from '../containers/Header/Header';
-import { Footer } from '../containers/Footer/Footer';
-import { getGallery } from '../services/gallery.service';
+import { Header } from '../../containers/Header/Header';
+import { Footer } from '../../containers/Footer/Footer';
+import { getGallery } from '../../services/gallery.service';
+import { getStaticPaths } from '../../translations/utils';
 
 SwiperCore.use([Navigation]);
 
@@ -98,6 +99,8 @@ function Gallery({ posts, title, }) {
     </div>
   );
 }
+
+export { getStaticPaths };
 
 export async function getStaticProps({ locale }) {
     // Call an external API endpoint to get posts.

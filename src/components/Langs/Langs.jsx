@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 // import PropTypes from 'prop-types';
 // import cn from 'classnames';
 import css from './Langs.module.scss';
+import { LanguageContext } from '../../translations/context';
 
 export const Langs = ({ router }) => {
-  const { locale, locales, defaultLocale } = router;
+	const { locale, locales } = useContext(LanguageContext);
   const langsWithoutDefault = locales.filter(lang => lang !== locale);
+
   return (
     <div className={css['langs-header']}>
       <ul>
@@ -17,10 +19,7 @@ export const Langs = ({ router }) => {
             <li 
               className={lang === locale ? css.active: ''} 
               key={lang}>
-              {lang === defaultLocale ? 
-              <a href={`${router.asPath}`}>{lang}</a> :
               <a href={`/${lang}${router.asPath}`}>{lang}</a>
-              }
             </li>
           ))}
         

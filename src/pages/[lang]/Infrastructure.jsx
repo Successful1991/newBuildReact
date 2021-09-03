@@ -1,11 +1,12 @@
 import React from "react";
 import Head from 'next/head';
 // import { useLocomotiveScroll } from 'react-locomotive-scroll';
-import styles from '../styles/Infrastructure.module.scss';
+import styles from '../../styles/Infrastructure.module.scss';
 // import 'locomotive-scroll/dist/locomotive-scroll.css';
-import { Header } from '../containers/Header/Header';
-import { Footer } from '../containers/Footer/Footer';
-import { Map } from '../containers/Map/Map';
+import { Header } from '../../containers/Header/Header';
+import { Footer } from '../../containers/Footer/Footer';
+import { Map } from '../../containers/Map/Map';
+import { getStaticPaths } from '../../translations/utils';
 
 export default function Infrastructure({ containerRef }) {
   const mainMap = {lat: 50.485010, lng: 30.530143};
@@ -395,4 +396,12 @@ export default function Infrastructure({ containerRef }) {
       <Footer />
     </div>
   );
+}
+
+export { getStaticPaths };
+
+export async function getStaticProps() {
+  return {
+    props: {},
+  }
 }

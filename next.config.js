@@ -1,14 +1,13 @@
 /* eslint-disable global-require */
-const { PHASE_PRODUCTION_BUILD, PHASE_DEVELOPMENT_SERVER } = require('next/constants');
-const { withPlugins, optional } = require('next-compose-plugins');
-const nextTranslate = require('next-translate');
 
-const nextConfig = nextTranslate({
-  i18n: {
-    locales: ['ua', 'ru','en', ],
-    defaultLocale: 'ua',
-    
-  },
+
+const { withPlugins, optional } = require('next-compose-plugins');
+const { PHASE_PRODUCTION_BUILD, PHASE_DEVELOPMENT_SERVER } = require('next/constants');
+
+const DEFAULT_LOCALE = 'en';
+
+const nextConfig = {
+  trailingSlash: true,
   sassOptions: {
     prependData: `
     @import "src/styles/mixins/index.scss"; 
@@ -33,7 +32,24 @@ const nextConfig = nextTranslate({
     });
     return config;
   },
-});
+  async rewrites() {
+    return {
+      fallback: [
+        {
+          source: '/:path*',
+          destination: `/${DEFAULT_LOCALE}/news`,
+          has: [
+            {
+              type: 'query',
+              key: 'lang',
+              value: 'en',
+            },
+          ],
+        },
+      ]
+    }
+  }
+};
 
 module.exports = withPlugins(
   [
