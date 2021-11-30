@@ -4,8 +4,6 @@
 const { withPlugins, optional } = require('next-compose-plugins');
 const { PHASE_PRODUCTION_BUILD, PHASE_DEVELOPMENT_SERVER } = require('next/constants');
 
-const DEFAULT_LOCALE = 'en';
-
 const nextConfig = {
   trailingSlash: true,
   sassOptions: {
@@ -36,15 +34,19 @@ const nextConfig = {
     return {
       fallback: [
         {
-          source: '/:path*',
-          destination: `/${DEFAULT_LOCALE}/news`,
-          has: [
-            {
-              type: 'query',
-              key: 'lang',
-              value: 'en',
-            },
-          ],
+          // source: '/(\\{1,})',
+          source: '/:lang(\\w{0})(.*)',
+          // destination: `/${DEFAULT_LOCALE}/:path*`,
+          // source: '/:path*',
+          // destination: `/${DEFAULT_LOCALE}/news`,
+          destination: `/ru/contacts`,
+          // has: [
+          //   {
+          //     type: 'query',
+          //     key: 'lang',
+          //     value: 'en',
+          //   },
+          // ],
         },
       ]
     }
