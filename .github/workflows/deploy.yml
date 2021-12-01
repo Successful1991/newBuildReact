@@ -13,4 +13,4 @@ jobs:
         USERNAME: root
         PORT: 22
         KEY: ${{ secrets.SSHKEY }}
-        script: kill -9 `cat proccess.txt` && cd newBuildReact && git pull origin langs && npm run build && cd ../ &&  node /root/newBuildReact/node_modules/.bin/next start & echo $! > proccess.txt
+        script: kill -9 `cat proccess.txt` && cd newBuildReact && git pull origin langs && npm run build && cd ../ &&  nohup node /root/newBuildReact/node_modules/.bin/next start & echo $! > proccess.txt
