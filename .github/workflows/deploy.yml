@@ -6,11 +6,11 @@ jobs:
   build:
     runs-on: ubuntu-18.04
     steps:
-    - uses: actions/checkout@v1
     - name: Executing remote command
       uses: appleboy/ssh-action@master
       with:
-        host: ${{ secrets.HOST }}
+        host: 185.65.244.35
         USERNAME: root
+        PORT: 22
         KEY: ${{ secrets.SSHKEY }}
         script: cd newBuildReact | ls
