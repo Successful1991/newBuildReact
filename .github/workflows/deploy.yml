@@ -13,4 +13,4 @@ jobs:
         USERNAME: root
         PORT: 22
         KEY: ${{ secrets.SSHKEY }}
-        script: cd neBuildReact && git pull origin langs && npm run build
+        script: cd newBuildReact && git pull origin langs && npm run build
