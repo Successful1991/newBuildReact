@@ -17,5 +17,5 @@ jobs:
           cd newBuildReact 
           git pull origin langs 
           npm run build 
-          kill `cat ../proccess.txt` ||
+          kill `cat ../proccess.txt`
           nohup node index.js & echo $! > ../proccess.txt
