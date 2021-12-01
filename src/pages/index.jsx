@@ -45,7 +45,7 @@ export default function Home({ flats }) {
     <div className={styles.container} data-scroll-container id='app'>
       <Header translate={t}/>
       <section className={styles.main}>
-        <h1 data-scroll className={styles.title}>Starting template WITH DEPLOY22221 1245456453</h1>
+        <h1 data-scroll className={styles.title}>Starting template WITH DEPLOY</h1>
         <SelectTab />
         <Filter flats={flats} setFilteredFlats={setFilteredFlats}/>
         <div ref={refFilter} className={styles.cards} >
