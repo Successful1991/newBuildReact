@@ -13,4 +13,4 @@ jobs:
         USERNAME: root
         PORT: 22
         KEY: ${{ secrets.SSHKEY }}
-        script: cd newBuildReact | ls
+        script: cd newBuildReact && ls
