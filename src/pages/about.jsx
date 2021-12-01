@@ -32,16 +32,16 @@ export default function About() {
        <Button onClick={toggleDrawer('right', true)}>About US</Button>
         <SwipeableDrawer onClose={toggleDrawer('right', false)} anchor="right" open={state.right}>
           <ul>
-            <li>Про нас1</li>
-            <li>Про нас2</li>
-            <li>Про нас3</li>
-            <li>Про нас4</li>
-            <li>Про нас5</li>
-            <li>Про нас6</li>
-            <li>Про нас7</li>
-            <li>Про нас8</li>
-            <li>Про нас9</li>
-            <li>Про нас10</li>
+            <li>Про Lorem нас1</li>
+            <li>Про Lorem нас2</li>
+            <li>Про Lorem нас3</li>
+            <li>Про Lorem нас4</li>
+            <li>Про Lorem нас5</li>
+            <li>Про Lorem нас6</li>
+            <li>Про Lorem нас7</li>
+            <li>Про Lorem нас8</li>
+            <li>Про Lorem нас9</li>
+            <li>Про Lorem нас10</li>
           </ul>
         </SwipeableDrawer>
       </main>
